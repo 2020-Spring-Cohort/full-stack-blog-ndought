@@ -1,4 +1,4 @@
-package org.wcci.blog;
+package org.wcci.blog.repositories;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
