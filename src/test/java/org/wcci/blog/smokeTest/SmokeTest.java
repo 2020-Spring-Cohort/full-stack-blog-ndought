@@ -10,6 +10,6 @@ class SmokeTest {
 
     @Test
     void contextLoads() {
-        
+
     }
 }
