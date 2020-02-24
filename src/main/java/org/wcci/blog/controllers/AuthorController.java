@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.wcci.blog.models.Author;
 import org.wcci.blog.repositories.AuthorRepository;
 import org.wcci.blog.repositories.PostRepository;
+import org.wcci.blog.storage.AuthorStorage;
 
 import javax.annotation.Resource;
 import java.util.Optional;
@@ -23,6 +24,10 @@ public class AuthorController {
 
     @Resource
     AuthorRepository authorRepo;
+
+    public AuthorController(AuthorStorage mockStorage) {
+        
+    }
 
     @GetMapping("/{id}")
     public String getAuthor(@PathVariable Long id, Model model) throws Exception {
@@ -58,5 +63,9 @@ public class AuthorController {
             authorToAdd = authorRepo.save(new Author(author));
         }
         return "redirect:/authors/" + authorToAdd.getId();
+    }
+
+    public String displaySingleAuthor(String name, Model mockModel) {
+        return name;
     }
 }

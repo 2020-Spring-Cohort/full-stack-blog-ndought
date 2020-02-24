@@ -7,10 +7,8 @@ import org.wcci.blog.models.Post;
 
 import java.util.Optional;
 
-@Repository
+
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
-    Category findByCategory(String category);
-
-    Optional<Post> findById(Post id);
+    Optional<Category> findByName(String name);
 }

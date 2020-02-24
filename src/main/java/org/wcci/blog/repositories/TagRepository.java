@@ -4,8 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.wcci.blog.models.Tag;
 
-@Repository
+import java.util.Optional;
+
+
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
-    Tag findByTagLabel(String tagLabel);
+    Optional<Tag> findByTagLabel(String name);
 }

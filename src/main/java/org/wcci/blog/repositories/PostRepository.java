@@ -4,8 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.wcci.blog.models.Post;
 
-@Repository
+import java.util.Optional;
+
+
 public interface PostRepository extends CrudRepository<Post, Long> {
 
-    Post findByTitle(String Title);
+    Optional<Post> findByTitle(String name);
 }
