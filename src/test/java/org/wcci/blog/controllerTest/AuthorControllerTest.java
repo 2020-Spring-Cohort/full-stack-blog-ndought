@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.wcci.blog.controllers.AuthorController;
 import org.wcci.blog.models.Author;
+import org.wcci.blog.repositories.AuthorRepository;
 import org.wcci.blog.storage.AuthorStorage;
 
 import java.util.Collections;
@@ -29,13 +30,13 @@ public class AuthorControllerTest {
     private Model mockModel;
 
     @Autowired
-    private AuthorStorage storage;
+    private AuthorRepository storage;
 
     @BeforeEach
     void setUp() {
         mockModel = mock(Model.class);
         mockStorage = mock(AuthorStorage.class);
-        underTest = new AuthorController(mockStorage);
+        underTest = new AuthorController(mockStorage, storage);
         mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
     }
     @Test
@@ -45,8 +46,8 @@ public class AuthorControllerTest {
 
         underTest.displaySingleAuthor("name", mockModel);
 
-        verify(mockStorage).findAuthorByName("author");
-        verify(mockModel).addAttribute("author", testAuthor);
+        verify(mockStorage).findAuthorByName("bill");
+        verify(mockModel).addAttribute("authors", testAuthor);
     }
     @Test
     public void shouldReturnViewNamedAuthorWhenDisplaySingleAuthorIsCalled() {
@@ -57,12 +58,11 @@ public class AuthorControllerTest {
     public void shouldGoToIndividualEndpoint() throws Exception {
         Author testAuthor = new Author("dave");
         when(mockStorage.findAuthorByName("dave")).thenReturn(testAuthor);
-
-        mockMvc.perform(get("/author/dave"))
+        mockMvc.perform(get("/authors/dave"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("author"))
-                .andExpect(model().attributeExists("author"))
-                .andExpect(model().attribute("author", testAuthor));
+                .andExpect(model().attributeExists("authors"))
+                .andExpect(model().attribute("authors", testAuthor));
 
     }
     @Test

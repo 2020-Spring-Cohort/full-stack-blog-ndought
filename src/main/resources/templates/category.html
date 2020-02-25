@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <title th:text="${category.getCategory()}">Category</title>
 </head>
 <body>
 
 </body>
+<header>
+    Hello Top
+</header>
+
+<div>
+    <h1 th:text="${category.getCategory()}"></h1>
+    <h3 th:each="post : ${category.getPost()}">
+        <a th:text="${post.getCategory()}" th:href="@{'/post/' + ${post.getId()}}">Post</a>
+    </h3>
+</div>
+
+<footer>
+    Hello Bottom
+</footer>
+
 </html>
