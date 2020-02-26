@@ -7,6 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
+@Entity
+public class Category {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    @OneToMany(mappedBy = "category")
+    private Collection<Post> post;
+
+
+}
 
 //@Entity
 //public class Category {

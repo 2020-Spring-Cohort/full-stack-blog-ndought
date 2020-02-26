@@ -5,6 +5,25 @@ package org.wcci.blog.models;
 //import javax.persistence.Id;
 //import javax.persistence.ManyToMany;
 //import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.Collection;
+import java.util.Set;
+
+@Entity
+public class Tag {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    @ManyToMany(mappedBy = "tag")
+    private Collection<Post> post;
+
+}
 //
 //@Entity
 //public class Tag {
