@@ -9,23 +9,25 @@ import org.wcci.blog.storage.PostStorage;
 import org.wcci.blog.storage.TagStorage;
 
 @Controller
-@RequestMapping("post")
+@RequestMapping("blog")
 public class PostController {
 
     private PostStorage storage;
-    private CategoryStorage categoryStorage;
-    private TagStorage tagStorage;
 
-    public PostController(PostStorage storage, CategoryStorage categoryStorage, TagStorage tagStorage) {
+
+    public PostController(PostStorage storage) {
         this.storage = storage;
-        this.categoryStorage = categoryStorage;
-        this.tagStorage = tagStorage;
-    }
 
-    @GetMapping
-    public String displayPosts(Model model) {
-        model.addAttribute("post", storage.getAll());
-        model.addAttribute("category", categoryStorage.getAll());
+    }
+    @RequestMapping
+    public String post(Model model) {
+        model.addAttribute("title", "My Blog");
         return "post";
     }
+
+//    @GetMapping
+//    public String displayPosts(Model model) {
+//        model.addAttribute("post", storage.getAll());
+//        return "post";
+//    }
 }

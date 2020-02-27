@@ -8,4 +8,6 @@ public interface PostStorage {
     void store(Post newPost);
 
     Post findPostById(long id);
+
+
 }

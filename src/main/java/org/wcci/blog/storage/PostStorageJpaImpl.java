@@ -23,4 +23,6 @@ public class PostStorageJpaImpl implements PostStorage {
     public Post findPostById(long id) {
         return postRepository.findById(id).get();
     }
+
+
 }
