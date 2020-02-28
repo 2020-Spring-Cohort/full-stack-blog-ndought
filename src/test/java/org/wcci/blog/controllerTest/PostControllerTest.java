@@ -46,4 +46,5 @@ public class PostControllerTest {
         String result = underTest.displayPost(1L, model);
         assertThat(result).isEqualTo("post");
     }
+
 }
