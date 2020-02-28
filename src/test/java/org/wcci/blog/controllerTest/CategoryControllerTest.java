@@ -11,6 +11,7 @@ import org.wcci.blog.storage.CategoryStorage;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -48,6 +49,16 @@ public class CategoryControllerTest {
     public void shouldReturnViewNamedCategoryWhenDisplaySingleCategoryIsCalled() {
         String viewName = underTest.displaySingleCategory("tech", mockModel);
         assertThat(viewName).isEqualTo("category");
+    }
+    @Test
+    public void shouldGoToIndividualEndpoint() throws Exception {
+       Category testCategory = new Category("football");
+       when(mockStorage.findCategoryByName("sports")).thenReturn(testCategory);
+
+       mockMvc.perform(get("/categories/sports"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("category"))
+               .andExpect(model().attribute("category", testCategory));
     }
 
 }
