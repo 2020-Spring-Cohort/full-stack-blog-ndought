@@ -9,7 +9,7 @@ package org.wcci.blog.controllerTest;
 //import org.springframework.ui.Model;
 //import org.wcci.blog.controllers.AuthorController;
 //import org.wcci.blog.models.Author;
-//import org.wcci.blog.repositories.AuthorRepository;
+//import org.wcci.blog.storage.repositories.AuthorRepository;
 //import org.wcci.blog.storage.AuthorStorage;
 //
 //import java.util.Collections;

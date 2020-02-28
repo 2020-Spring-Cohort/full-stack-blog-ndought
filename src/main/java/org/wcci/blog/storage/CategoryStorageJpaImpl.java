@@ -2,7 +2,7 @@ package org.wcci.blog.storage;
 
 //import org.springframework.stereotype.Service;
 //import org.wcci.blog.models.Category;
-//import org.wcci.blog.repositories.CategoryRepository;
+//import org.wcci.blog.storage.repositories.CategoryRepository;
 //
 //import java.util.Collection;
 //

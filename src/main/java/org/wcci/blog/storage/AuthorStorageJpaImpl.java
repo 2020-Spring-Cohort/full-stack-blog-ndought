@@ -2,7 +2,7 @@ package org.wcci.blog.storage;
 
 //import org.springframework.stereotype.Service;
 //import org.wcci.blog.models.Author;
-//import org.wcci.blog.repositories.AuthorRepository;
+//import org.wcci.blog.storage.repositories.AuthorRepository;
 //
 //import java.util.Collection;
 

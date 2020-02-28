@@ -1,16 +1,9 @@
 package org.wcci.blog.models;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.Id;
-//import javax.persistence.ManyToMany;
-//import java.util.Collection;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
 public class Tag {

@@ -8,8 +8,8 @@ package org.wcci.blog.controllers;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.wcci.blog.models.Author;
-//import org.wcci.blog.repositories.AuthorRepository;
-//import org.wcci.blog.repositories.PostRepository;
+//import org.wcci.blog.storage.repositories.AuthorRepository;
+//import org.wcci.blog.storage.repositories.PostRepository;
 //import org.wcci.blog.storage.AuthorStorage;
 //
 //import javax.annotation.Resource;
