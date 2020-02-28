@@ -16,6 +16,7 @@ public class CategoriesController {
     public CategoriesController(CategoryStorage storage) {
         this.storage = storage;
     }
+
     @RequestMapping
     public String displayCategories(Model model) {
         model.addAttribute("categories", storage.getAll());
@@ -31,7 +32,7 @@ public class CategoriesController {
     @PostMapping("/add-category")
     public String addCategory(@RequestParam String name) {
         storage.store(new Category(name));
-        return "redirect";
+        return "redirect:";
     }
 
 }
