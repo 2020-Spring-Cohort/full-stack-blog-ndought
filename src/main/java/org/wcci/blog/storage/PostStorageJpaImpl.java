@@ -5,23 +5,30 @@ import org.springframework.stereotype.Service;
 import org.wcci.blog.models.Post;
 import org.wcci.blog.storage.repositories.PostRepository;
 
+import java.util.Collection;
+
 @Service
 public class PostStorageJpaImpl implements PostStorage {
 
-    PostRepository postRepository;
+    PostRepository repository;
 
-    public PostStorageJpaImpl(PostRepository postRepository) {
-        this.postRepository = postRepository;
+    public PostStorageJpaImpl(PostRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Collection<Post> getAll() {
+        return (Collection<Post>) repository.findAll();
     }
 
     @Override
     public void store(Post newPost) {
-        postRepository.save(newPost);
+        repository.save(newPost);
     }
 
     @Override
-    public Post findPostById(long id) {
-        return postRepository.findById(id).get();
+    public Post findPostById(Long id) {
+        return repository.findById(id).get();
     }
 
 

@@ -1,36 +1,33 @@
 package org.wcci.blog.storage;
 
-//import org.springframework.stereotype.Service;
-//import org.wcci.blog.models.Author;
-//import org.wcci.blog.storage.repositories.AuthorRepository;
-//
-//import java.util.Collection;
 
+import org.springframework.stereotype.Service;
+import org.wcci.blog.models.Author;
+import org.wcci.blog.storage.repositories.AuthorRepository;
 
-//public class AuthorStorageJpaImpl implements AuthorStorage {
+import java.util.Collection;
 
-//   private final AuthorRepository authorRepository;
-//
-//    public AuthorStorageJpaImpl(AuthorRepository authorRepository) {
-//        this.authorRepository = authorRepository;
-//    }
-//
-//    @Override
-//    public void store(Author authorToStore) {
-//        authorRepository.save(authorToStore);
-//    }
-//    @Override
-//    public Collection<Author> getAll() {
-//        return (Collection<Author>) repository.findAll();
-//    }
-//
-//    @Override
-//    public Author findAuthorByName(String name) {
-//        return repository.findByName(name).get();
-//    }
+@Service
+public class AuthorStorageJpaImpl implements AuthorStorage {
 
-//    @Override
-//    public Author findAuthorById(Long id){
-//        return repository.findById(id).get();
-//    }
+    AuthorRepository repository;
 
+    public AuthorStorageJpaImpl(AuthorRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Collection<Author> getAll() {
+        return (Collection<Author>) repository.findAll();
+    }
+
+    @Override
+    public void store(Author author) {
+        repository.save(author);
+    }
+
+    @Override
+    public Author findAuthorByName(String name) {
+        return repository.findByName(name).get();
+    }
+}

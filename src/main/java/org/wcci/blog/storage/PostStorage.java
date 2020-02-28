@@ -3,11 +3,14 @@ package org.wcci.blog.storage;
 
 import org.wcci.blog.models.Post;
 
+import java.util.Collection;
+
 public interface PostStorage {
 
-    void store(Post newPost);
+  Collection<Post> getAll();
 
-    Post findPostById(long id);
+  void store(Post newPost);
 
+  Post findPostById(Long id);
 
 }
