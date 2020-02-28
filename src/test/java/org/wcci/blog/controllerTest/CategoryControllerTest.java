@@ -75,5 +75,12 @@ public class CategoryControllerTest {
                 .andExpect(model().attributeExists("categories"))
                 .andExpect(model().attribute("categories", categoryList));
     }
+    @Test
+    public void addCategoryShouldRedirect() throws Exception {
+        mockMvc.perform(post("/categories/add-category").param("name", "test"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+        verify(mockStorage).store(new Category("test"));
+    }
 
 }
