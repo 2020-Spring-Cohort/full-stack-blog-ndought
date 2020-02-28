@@ -60,5 +60,20 @@ public class CategoryControllerTest {
                .andExpect(view().name("category"))
                .andExpect(model().attribute("category", testCategory));
     }
+    @Test
+    public void categoriesEndPointShouldDisplayAllCategories() throws Exception {
+        Category testCategory = new Category("test");
+
+        List<Category> categoryList = Collections.singletonList(testCategory);
+
+        when(mockStorage.getAll()).thenReturn(categoryList);
+
+        mockMvc.perform(get("/categories/"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("categories"))
+                .andExpect(model().attributeExists("categories"))
+                .andExpect(model().attribute("categories", categoryList));
+    }
 
 }
