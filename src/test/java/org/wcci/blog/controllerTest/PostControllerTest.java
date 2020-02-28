@@ -14,8 +14,7 @@ import org.wcci.blog.storage.PostStorage;
 import org.wcci.blog.storage.TagStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class PostControllerTest {
 
@@ -46,5 +45,13 @@ public class PostControllerTest {
         String result = underTest.displayPost(1L, model);
         assertThat(result).isEqualTo("post");
     }
+
+    @Test
+    public void displayPostInteractsWithDependenciesCorrectly() {
+        underTest.displayPost(1L, model);
+        verify(mockStorage).findPostById(1L);
+        verify(model).addAttribute("post", testPost);
+    }
+
 
 }
