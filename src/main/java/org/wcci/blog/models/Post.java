@@ -1,12 +1,14 @@
 package org.wcci.blog.models;
 
+
+
+import javax.persistence.Entity;
+
+
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
+import java.util.*;
 @Entity
 public class Post {
 
@@ -14,61 +16,97 @@ public class Post {
     @GeneratedValue
     private Long id;
     private String title;
-    private LocalDateTime time;
+//    private LocalDateTime localDateTime;
 
+
+    @ManyToOne
+    private Author author;
+    @ManyToOne
+    private Category category;
+    @ManyToMany
+    private Collection<Tag> tags;
     @Lob
     private String body;
 
-    @ManyToMany
-    private Collection<Author> authors;
-
-    @ManyToOne
-    private Category category;
-
-    @ManyToMany
-    private List<Tag> tags;
-
-
     public Post() {
     }
-    public Post(String title, String body, String time, Category category, Author author, Tag ...tags) {
+
+    public Post(String author, String title, String body) {
         this.title = title;
         this.body = body;
+        this.tags = new ArrayList<>();
+    }
+
+    public Post(Category category, String author, String title, String body) {
         this.category = category;
-        this.time = LocalDateTime.now();
-        this.authors = Arrays.asList(author);
-        this.tags = Arrays.asList(tags);
+        this.title = title;
+        this.body = body;
+        this.tags = new ArrayList<>();
+    }
+    public Post(Category category, String author, String title, String body, Tag... tags) {
+        this.category = category;
+        this.title = title;
+        this.body = body;
+        this.tags = new ArrayList<>();
+    }
+    public Collection<Tag> getTags() {
+        return tags;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public LocalDateTime getTime() {
-        return time;
-    }
-
     public String getBody() {
         return body;
     }
 
-    public Collection<Author> getAuthors() {
-        return authors;
-    }
+
+
+//    public LocalDateTime getLocalDateTime() {
+//        return localDateTime;
+//    }
 
     public Category getCategory() {
         return category;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", category=" + category +
+                '}';
     }
-    public void addTagToTags(Tag tag) {
-        ArrayList<Tag> tags = new ArrayList<Tag>(this.getTags());
-        tags.add(tag);
-        this.tags = tags;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Post post = (Post) o;
+
+        if (id != null ? !id.equals(post.id) : post.id != null) return false;
+        if (title != null ? !title.equals(post.title) : post.title != null) return false;
+        if (body != null ? !body.equals(post.body) : post.body != null) return false;
+        return category != null ? category.equals(post.category) : post.category == null;
     }
-    public Long getId() {
-        return id;
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (body != null ? body.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
     }
 }
+
+

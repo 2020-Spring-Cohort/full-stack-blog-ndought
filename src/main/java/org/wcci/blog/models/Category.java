@@ -14,36 +14,48 @@ public class Category {
     @Id
     @GeneratedValue
     private Long id;
-    private String category;
+    private String name;
+    @OneToMany(mappedBy = "category")
+    private Collection<Post> posts;
 
-    @OneToMany (mappedBy = "category")
-    private Collection<Post> post = new ArrayList<>();
+    protected Category() {
+    }
+    public Category(String name) {
+        this.name = name;
+    }
+    public Category(String name, Collection<Post> posts) {
+        this.name = name;
+        this.posts = posts;
+    }
 
-    public Category() {}
-
-    public Category(String category) {
-        this.category = category;
-    }
-    public Category(String category, Collection<Post> post) {
-        this.category = category;
-        this.post = post;
-    }
-    public Collection<Post> getPost() {
-        return post;
-    }
     public Long getId() {
         return id;
     }
-    public String getCategory() {
-        return category;
+
+    public String getName() {
+        return name;
+    }
+
+    public Collection<Post> getPosts() {
+        return posts;
     }
 
     @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", category='" + category + '\'' +
-                ", post=" + post +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (id != null ? !id.equals(category.id) : category.id != null) return false;
+        return name != null ? name.equals(category.name) : category.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
+

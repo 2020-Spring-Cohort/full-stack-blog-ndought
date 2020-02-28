@@ -1,11 +1,13 @@
-package org.wcci.blog.repositories;
+package org.wcci.blog.storage.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import org.wcci.blog.models.Tag;
 
-@Repository
+import java.util.Optional;
+
+
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
-    Tag findByTagLabel(String tagLabel);
+    Optional<Tag> findByName(String name);
 }
+

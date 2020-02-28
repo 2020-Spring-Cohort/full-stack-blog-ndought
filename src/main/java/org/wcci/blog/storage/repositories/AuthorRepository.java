@@ -1,11 +1,13 @@
-package org.wcci.blog.repositories;
+package org.wcci.blog.storage.repositories;
+
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import org.wcci.blog.models.Author;
 
-@Repository
+import java.util.List;
+import java.util.Optional;
+
 public interface AuthorRepository extends CrudRepository<Author, Long> {
 
-    Author findByAuthor(String author);
+    Optional<Author> findByName(String name);
 }

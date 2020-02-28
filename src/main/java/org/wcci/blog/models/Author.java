@@ -1,51 +1,60 @@
 package org.wcci.blog.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 public class Author {
 
+
     @Id
     @GeneratedValue
     private Long id;
-    private String author;
-
-    @ManyToMany(mappedBy = "authors")
+    private String name;
+    @OneToMany(mappedBy = "author")
+    private Collection<Tag> tags;
+    @OneToMany(mappedBy = "author")
     private Collection<Post> posts;
 
-    public Author() {}
+    public Author () {
+    }
 
-    public Author(String author) {
-        this.author = author;}
-
-    public Collection<Post> getPosts() {
-             return posts;}
+    public Author(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getName() {
+        return name;
     }
 
-    public void addPostsToAuthor(Collection<Post> posts) {
-        this.posts = posts;
+    public Collection<Tag> getTags() {
+        return tags;
     }
 
     @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", author='" + author + '\'' +
-                ", posts=" + posts +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Author author = (Author) o;
+
+        if (id != null ? !id.equals(author.id) : author.id != null) return false;
+        return name != null ? name.equals(author.name) : author.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
+
+
 
 
