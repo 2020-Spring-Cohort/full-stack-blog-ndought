@@ -40,4 +40,10 @@ public class TagControllerTest {
         assertThat(result).isEqualTo("tag");
         verify(mockStorage).findTagById(1L);
     }
+    @Test
+    public void displayTagInteractsWithDependenciesCorrectly() {
+        underTest.displayTags(1L, model);
+        verify(mockStorage).findTagById(1L);
+        verify(model).addAttribute("tag", testTag);
+    }
 }
