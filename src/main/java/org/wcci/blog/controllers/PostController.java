@@ -3,10 +3,10 @@ package org.wcci.blog.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.wcci.blog.models.Category;
 import org.wcci.blog.models.Post;
+import org.wcci.blog.models.Tag;
 import org.wcci.blog.storage.CategoryStorage;
 import org.wcci.blog.storage.PostStorage;
 import org.wcci.blog.storage.TagStorage;
@@ -38,6 +38,31 @@ public class PostController {
         model.addAttribute("post", retrievedPost);
         model.addAttribute("tags", tagStorage.getAll());
         return "post";
+    }
+    @PostMapping("add")
+    public String processAddPostForm(@RequestParam("category") String category, @RequestParam("postName") String postName, @RequestParam("postDescription") String postDescription,
+                                     @RequestParam(value = "userName", required = false) String userName) {
+
+        Category retrievedCategory = categoryStorage.findCategoryByName(category);
+        if (userName == null || userName.isEmpty()) {
+            storage.store(new Post(retrievedCategory, postName, postDescription));
+        } else {
+            storage.store(new Post(userName, retrievedCategory, postName, postDescription));
+        }
+        return "redirect:";
+    }
+
+    @PostMapping("/{id}/set-tag")
+    public String addTagToPost(@RequestParam("tagName") String tagName, @PathVariable long id) {
+        Tag retrievedTag = tagStorage.findTagByName(tagName);
+        Post retrievedPost = storage.findPostById(id);
+
+        if (retrievedPost.getTags().contains(retrievedTag)) {
+            return "redirect:/post/" + id;
+        }
+        retrievedPost.getTags().add(retrievedTag);
+        storage.store(retrievedPost);
+        return "redirect:/post/" + id;
     }
 
 }

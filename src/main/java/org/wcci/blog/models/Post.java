@@ -27,6 +27,8 @@ public class Post {
     private Collection<Tag> tags;
     @Lob
     private String body;
+    private static int idCount = 1;
+    private int postId;
 
     public Post() {
     }
@@ -35,6 +37,7 @@ public class Post {
         this.title = title;
         this.body = body;
         this.tags = new ArrayList<>();
+        this.postId = idCount++;
     }
 
     public Post(Category category, String author, String title, String body) {
@@ -49,6 +52,15 @@ public class Post {
         this.body = body;
         this.tags = new ArrayList<>();
     }
+
+    public Post(String userName, Category retrievedCategory, String postName, String postDescription) {
+
+    }
+
+    public Post(Category retrievedCategory, String postName, String postDescription) {
+
+    }
+
     public Collection<Tag> getTags() {
         return tags;
     }
@@ -63,6 +75,13 @@ public class Post {
 
     public String getBody() {
         return body;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+    public int getIdCount() {
+        return idCount;
     }
 
 
