@@ -14,7 +14,10 @@ import org.wcci.blog.models.Tag;
 import org.wcci.blog.storage.TagStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.setMaxElementsForPrinting;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class TagControllerTest {
@@ -56,5 +59,12 @@ public class TagControllerTest {
                 .andExpect(view().name("tag"))
                 .andExpect(model().attributeExists("tag"))
                 .andExpect(model().attribute("tag", testTag));
+    }
+    @Test
+    public void addTagShouldRedirect() throws Exception {
+        mockMvc.perform(post("/tags/add-tag").param("tag", "test"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+        verify(mockStorage).add(new Tag("test"));
     }
 }
