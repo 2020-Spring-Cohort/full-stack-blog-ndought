@@ -60,7 +60,7 @@ public class PostControllerTest {
     public void displayPostMappingIsCorrect() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/post/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/post/single-post/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("post"))
                 .andExpect(model().attributeExists("post"))
@@ -68,7 +68,7 @@ public class PostControllerTest {
     }
     @Test
     public void addPostShouldRedirect() throws Exception {
-        mockMvc.perform(post("add")
+        mockMvc.perform(post("/post/add")
                 .param("category", "tech")
                 .param("postName", "test")
                 .param("postDescription", "test")
