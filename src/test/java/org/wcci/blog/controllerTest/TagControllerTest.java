@@ -4,6 +4,7 @@ import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.wcci.blog.controllers.TagController;
@@ -14,6 +15,7 @@ import org.wcci.blog.storage.TagStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class TagControllerTest {
 
@@ -45,5 +47,14 @@ public class TagControllerTest {
         underTest.displayTags(1L, model);
         verify(mockStorage).findTagById(1L);
         verify(model).addAttribute("tag", testTag);
+    }
+    @Test
+    public void displayTagMappingIsCorrect() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/tags/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("tag"))
+                .andExpect(model().attributeExists("tag"))
+                .andExpect(model().attribute("tag", testTag));
     }
 }
