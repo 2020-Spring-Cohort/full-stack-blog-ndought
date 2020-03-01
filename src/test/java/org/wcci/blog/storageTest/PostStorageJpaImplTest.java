@@ -11,8 +11,7 @@ import org.wcci.blog.storage.repositories.PostRepository;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class PostStorageJpaImplTest {
 
@@ -32,5 +31,10 @@ public class PostStorageJpaImplTest {
         when(postRepository.findById(1L)).thenReturn(Optional.of(post));
         Post retrievedPost = storage.findPostById(1L);
         assertThat(retrievedPost).isEqualTo(post);
+    }
+    @Test
+    public void shouldStorePost() {
+        storage.store(post);
+        verify(postRepository).save(post);
     }
 }
