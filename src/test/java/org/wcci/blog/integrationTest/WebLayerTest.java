@@ -50,4 +50,12 @@ public class WebLayerTest {
                 .andExpect(view().name("categories"))
                 .andExpect(model().attributeExists("categories"));
     }
+    @Test
+    public void tagsShouldBeOkAndReturnTheTagViewWithTagsModelAttribute() throws Exception {
+        mockMvc.perform(get("/tags"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("tags"))
+                .andExpect(model().attributeExists("tags"));
+    }
 }
