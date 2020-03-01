@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Authors</title>
 </head>
-<body>
+
+
+<body class="content">
+
+<header class="content__nav">
+    <h3><a href="/categories">Categories</a></h3>
+    <h3><a href="/posts">Posts</a></h3>
+    <h3><a href="/tags">Tags</a></h3>
+</header>
+
+<div class="content__body">
+
+    <div class="content__body__info">
+
+        <h1>Authors</h1>
+
+
+        <div th:each="author : ${authors}" th:remove="tag">
+            <h2><a th:text="${author.getName()}" th:href="@{'/authors/' + ${author.getName()}}">Author</a></h2>
+        </div>
+
+        <form action="/authors/add-author/" method="POST">
+            <input type="text" name="name" placeholder="Author Name">
+            <button type="submit">Add Author</button>
+        </form>
+
+    </div>
+
+</div>
+
+<footer class="content__footer"><h3><a href="/">Home</a></h3></footer>
 
 </body>
 </html>
