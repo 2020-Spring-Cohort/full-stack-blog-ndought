@@ -31,7 +31,7 @@ public class SpringWebAppTest {
 
     @Test
     public void shouldReceiveOkFromPostsEndpoint() throws Exception {
-        mockMvc.perform(get("/post"))
+        mockMvc.perform(get("/posts"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
