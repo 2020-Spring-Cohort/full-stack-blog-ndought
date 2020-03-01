@@ -47,4 +47,10 @@ public class SpringWebAppTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+    @Test
+    public void shouldReceiveOkFromAuthorsEndpoint() throws Exception {
+        mockMvc.perform(get("/authors"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
  }
