@@ -42,4 +42,12 @@ public class WebLayerTest {
                 .andExpect(model().attributeExists("post"));
 
     }
+    @Test
+    public void categoriesShouldBeOkAndReturnTheCategoryViewWithCategoriesModelAttribute() throws Exception {
+        mockMvc.perform(get("/categories"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("categories"))
+                .andExpect(model().attributeExists("categories"));
+    }
 }
