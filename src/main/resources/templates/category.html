@@ -2,25 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <title th:text="${category.getCategory()}">Category</title>
+    <title th:text="${category.getName()}">Category</title>
 </head>
-<body>
 
-</body>
-<header>
-    Hello Top
+<body class="content">
+
+
+<header class="content__nav">
+    <h3><a href="/categories">Categories</a></h3>
+    <h3><a href="/posts">Posts</a></h3>
+    <h3><a href="/tags">Tags</a></h3>
+
 </header>
 
-<div>
-    <h1 th:text="${category.getCategory()}"></h1>
-    <h3 th:each="post : ${category.getPost()}">
-        <a th:text="${post.getCategory()}" th:href="@{'/post/' + ${post.getId()}}">Post</a>
+<div class="content__body">
+    <div class="content__body__info">
+
+    <h1 th:text="${category.getName()}"></h1>
+    <h3 th:each="post : ${category.getPosts()}">
+        <a th:text="${post.getTitle()}" th:href="@{'/post/' + ${post.getId()}}">Post</a>
     </h3>
+
+    </div>
 </div>
 
-<footer>
-    Hello Bottom
-</footer>
+<footer class="content__footer"><h3><a href="/"></a>Home</h3></footer>
 
+</body>
 </html>

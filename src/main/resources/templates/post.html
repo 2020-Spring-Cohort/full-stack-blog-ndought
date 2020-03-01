@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}">Title</title>
+
+    <meta charset="UTF-8">
+    <title th:text="${post.getTitle()}">Post</title>
 </head>
-<body>
-    <h1 th:text="${title}"></h1>
+<body class="content">
+
+<header class="content__nav">
+    <h3><a href="/categories">Categories</a></h3>
+    <h3><a href="/posts">Posts</a></h3>
+    <h3><a href="/tags">Tags</a></h3>
+</header>
+
+
+<div class="content__body">
+
+    <div class="content__body__info">
+
+        <h2 th:text="${post.getId()}">Default User Name</h2>
+        <h1 th:text="${post.getTitle()}">Default Title</h1>
+        <h3><a th:text="${post.getCategory().getName()}"
+               th:href="@{'/categories/' + ${post.getCategory().getName()}}">Default
+            Category </a></h3>
+        <p th:text="${post.getBody()}">Post Content</p>
+        <p>Tags</p>
+        <div th:each="hashtag : ${post.getTags()}" th:remove="tag">
+            <p><a th:text="${tag.getName()}" th:href="@{'/tags/' + ${tag.getId()}}">Tag</a></p>
+        </div>
+
+        <form th:action="'/posts/' + ${post.getId()} + '/set-tag'" method="post">
+            <select name="tagName">
+                <option th:each="tag : ${tags}" th:value="${tag.getName()}" th:text="${tag.getName()}">
+                    Tag
+                </option>
+            </select>
+            <button type="submit">Add Tag to Post</button>
+        </form>
+    </div>
+</div>
+
+<footer class="content__footer"><h3><a href="/">Home</a></h3></footer>
 
 </body>
 </html>

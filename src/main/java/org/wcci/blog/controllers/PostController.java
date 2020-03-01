@@ -12,7 +12,7 @@ import org.wcci.blog.storage.PostStorage;
 import org.wcci.blog.storage.TagStorage;
 
 @Controller
-@RequestMapping("blog")
+@RequestMapping("post")
 public class PostController {
 
     private CategoryStorage categoryStorage;
