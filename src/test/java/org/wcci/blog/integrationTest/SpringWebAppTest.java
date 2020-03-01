@@ -35,5 +35,10 @@ public class SpringWebAppTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-    
+    @Test
+    public void shouldReceieveOkFromCategoriesEndpoint() throws Exception {
+        mockMvc.perform(get("/categories"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }
