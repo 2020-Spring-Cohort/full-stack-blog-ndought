@@ -8,6 +8,7 @@ import org.wcci.blog.storage.repositories.CategoryRepository;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -23,5 +24,24 @@ public class CategoryStorageJpaImplTest {
         storage.store(testCategory);
         verify(categoryRepository).save(testCategory);
         assertThat(storage.getAll()).contains(testCategory);
+    }
+    @Test
+    public void shouldRetrieveSinglePostByName() {
+        CategoryRepository mockRepo = mock(CategoryRepository.class);
+        Category testCategory1 = new Category("tech");
+        Category testCategory2 = new Category("movies");
+        CategoryStorage underTest = new CategoryStorageJpaImpl(mockRepo);
+        underTest.store(testCategory1);
+        underTest.store(testCategory2);
+        Optional<Category> testCategory1Optional = Optional.of(testCategory1);
+        when(mockRepo.findByName("tech")).thenReturn(testCategory1Optional);
+
+        Optional<Category> testCategory2Optional = Optional.of(testCategory2);
+        when(mockRepo.findByName("movies")).thenReturn(testCategory2Optional);
+
+        Category retrievedCategory1 = underTest.findCategoryByName("tech");
+        Category retrievedCategory2 = underTest.findCategoryByName("movies");
+        assertThat(retrievedCategory1).isEqualTo(testCategory1);
+        assertThat(retrievedCategory2).isEqualTo(testCategory2);
     }
 }
