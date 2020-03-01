@@ -58,4 +58,12 @@ public class WebLayerTest {
                 .andExpect(view().name("tags"))
                 .andExpect(model().attributeExists("tags"));
     }
+    @Test
+    public void authorsShouldBeOkAndReturnTheAuthorViewWithAuthorsModelAttribute() throws Exception {
+        mockMvc.perform(get("/authors"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("authors"))
+                .andExpect(model().attributeExists("authors"));
+    }
 }
