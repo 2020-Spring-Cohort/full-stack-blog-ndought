@@ -35,4 +35,10 @@ public class TagStorageJpaImplTest {
         Tag retrievedTag = underTest.findTagByName("awesome");
         assertThat(retrievedTag).isEqualTo(testTag);
     }
+    @Test
+    public void shouldFindTagById() {
+        when(tagRepo.findById(1L)).thenReturn(Optional.of(testTag));
+        Tag retrievedTag = underTest.findTagById(1L);
+        assertThat(retrievedTag).isEqualTo(testTag);
+    }
 }
