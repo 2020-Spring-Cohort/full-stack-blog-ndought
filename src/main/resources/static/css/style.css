@@ -1,0 +1,28 @@
+
+.content__nav {
+    /*background-color: gray;*/
+    background-image: linear-gradient(to right, #780000, #707075);
+}
+
+.content__body {
+    background-image: linear-gradient(to top right, #707075, #780000, #707075);
+    /*background-color: #650000;*/
+}
+
+.content__body__form {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.content__footer {
+    /*background-color: gray;*/
+    background-image: linear-gradient(to left, #780000, #707075);
+}
+
+a:visited, a:link, a:hover, a:active {
+    color: whitesmoke;
+}
+
+h1 {
+    color: rgba(255, 255, 255, 0.97);
+}

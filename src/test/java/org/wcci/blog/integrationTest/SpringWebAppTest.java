@@ -29,12 +29,7 @@ public class SpringWebAppTest {
     @MockBean
     private TagStorage tagStorage;
 
-    @Test
-    public void shouldReceiveOkFromPostsEndpoint() throws Exception {
-        mockMvc.perform(get("/posts"))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
+
     @Test
     public void shouldReceiveOkFromCategoriesEndpoint() throws Exception {
         mockMvc.perform(get("/categories"))
@@ -50,6 +45,12 @@ public class SpringWebAppTest {
     @Test
     public void shouldReceiveOkFromAuthorsEndpoint() throws Exception {
         mockMvc.perform(get("/authors"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+    @Test
+    public void shouldReceiveOkFromPostsEndpoint() throws Exception {
+        mockMvc.perform(get("/posts"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
